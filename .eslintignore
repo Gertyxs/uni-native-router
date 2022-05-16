@@ -1,0 +1,12 @@
+node_modules
+build
+assets
+locales
+public
+dist
+lib
+www
+*.md
+*.md
+*.d.ts
+# rollup.config.js

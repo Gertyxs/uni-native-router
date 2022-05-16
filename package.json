@@ -1,0 +1,71 @@
+{
+  "name": "root",
+  "version": "1.0.2",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "build": "node scripts/build.mjs",
+    "release": "node scripts/release.mjs",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "lint": "eslint --fix --ext \".js,.jsx,.tsx,.ts,.vue\" packages/** --no-error-on-unmatched-pattern --ignore-path .eslintignore"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "yarn run lint"
+    ]
+  },
+  "keywords": [
+    "uni-app",
+    "router",
+    "uni-native-router"
+  ],
+  "author": {
+    "name": "Gertyxs",
+    "email": "gertyxs@outlook.com",
+    "url": "https://github.com/Gertyxs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gertyxs/uni-native-router.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.8",
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-replace": "^3.0.1",
+    "@types/node": "^14.14.25",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "chalk": "^5.0.1",
+    "conventional-changelog-cli": "^2.2.2",
+    "cross-env": "^7.0.3",
+    "enquirer": "^2.3.6",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "fs-extra": "^10.1.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1",
+    "minimist": "^1.2.6",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.63.0",
+    "rollup-plugin-dts": "^4.2.1",
+    "rollup-plugin-filesize": "^9.1.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "semver": "^7.3.7",
+    "shelljs": "^0.8.5",
+    "typescript": "^4.4.4"
+  }
+}
