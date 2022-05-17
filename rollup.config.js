@@ -6,7 +6,6 @@ import commonjs from '@rollup/plugin-commonjs'
 import { babel } from '@rollup/plugin-babel'
 import ts from 'rollup-plugin-typescript2'
 import json from '@rollup/plugin-json'
-import dts from 'rollup-plugin-dts'
 
 if (!process.env.TARGET) {
   throw new Error('TARGET package must be specified via --environment flag.')
@@ -75,7 +74,17 @@ const createConfig = (input, output = [], plugins = []) => {
     external,
     plugins: [
       // Parsing the typescript
-      ts({ useTsconfigDeclarationDir: true }),
+      ts({
+        tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+        cacheRoot: path.resolve(__dirname, 'node_modules/.rts2_cache'),
+        tsconfigOverride: {
+          compilerOptions: {
+            declaration: true,
+            declarationMap: true
+          },
+          exclude: ['**/__tests__', 'test-dts']
+        }
+      }),
       // Parsing third-party modules
       nodeResolve(),
       // handling json imports
@@ -116,11 +125,4 @@ const createConfig = (input, output = [], plugins = []) => {
 // create config
 const config = createConfig(getTargePkgPath('./src/index.ts'), createOutput({ main: './dist/index.js', module: './dist/index.esm.js', umd: './dist/index.umd.js' }), [])
 
-// create types
-const configDts = {
-  input: getTargePkgPath('./src/index.ts'),
-  output: [{ file: getTargePkgPath('./dist/index.d.ts'), format: 'es' }],
-  plugins: [dts()]
-}
-
-export default [config, configDts]
+export default [config]

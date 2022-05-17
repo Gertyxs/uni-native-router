@@ -1,11 +1,11 @@
 {
   "name": "read-pages",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "读取uni-app配置文件pages.json的工具包",
   "private": true,
   "main": "./index.js",
   "module": "./index.esm.js",
-  "types": "./index.d.ts",
+  "types": "./read-pages.d.ts",
   "keywords": [
     "uni-app",
     "router",

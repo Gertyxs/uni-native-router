@@ -59,7 +59,7 @@ const main = async () => {
   step('\nPushing to GitHub...')
   runIfNotDry(`git tag v${targetVersion}`)
   runIfNotDry(`git push origin refs/tags/v${targetVersion}`)
-  runIfNotDry('git push origin main')
+  runIfNotDry('git push origin master')
 
   if (isDryRun) {
     console.log(`\nDry run finished - run git diff to see package changes.`)
