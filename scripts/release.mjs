@@ -40,7 +40,7 @@ const main = async () => {
   if (stdout && !isDryRun) {
     step('\nCommitting changes...')
     runIfNotDry('git add -A')
-    runIfNotDry(`git commit -m release: v${targetVersion}`)
+    runIfNotDry(`git commit -m 'release: v${targetVersion}'`)
   } else {
     console.log('No changes to commit.')
   }

@@ -1,6 +1,7 @@
 import { deepClone, isString, isObject } from './utils'
 import { parseQuery, stringifyQuery } from './query'
 import { CreateOptions, RouteParams, RouteTypeParams, BackParams, MatchRouteParams, Route, Router, BeforeEach, AfterEach, RouteMeta } from './types'
+export * from './types'
 
 export let router: Router
 
@@ -223,24 +224,24 @@ export const createRouter = (options: CreateOptions) => {
   }
 
   /** 监听页面加载和 使用history方法跳转事件 */
-  // #ifdef H5
-  const historyChange = () => {
-    const path = window.location.hash.replace(/^#/, '')
-    try {
-      checkRouteValid({ path, type: 'redirectTo' })
-      // 符合要求下一步
-      next().then(() => {
+  if (window && window.addEventListener) {
+    const historyChange = () => {
+      const path = window.location.hash.replace(/^#/, '')
+      try {
+        checkRouteValid({ path, type: 'redirectTo' })
+        // 符合要求下一步
+        next().then(() => {
+          routing = false
+          callWithoutNext(afterEach, routeMeta.to, routeMeta.from)
+        })
+      } catch (error) {
         routing = false
-        callWithoutNext(afterEach, routeMeta.to, routeMeta.from)
-      })
-    } catch (error) {
-      routing = false
-      console.error(error)
+        console.error(error)
+      }
     }
+    window.addEventListener('popstate', historyChange)
+    window.addEventListener('DOMContentLoaded', historyChange)
   }
-  window.addEventListener('popstate', historyChange)
-  window.addEventListener('DOMContentLoaded', historyChange)
-  // #endif
 
   router = {
     push,
