@@ -1,8 +1,6 @@
 import { deepClone, isString, isObject } from './utils'
 import { parseQuery, stringifyQuery } from './query'
 import { CreateOptions, RouteParams, RouteTypeParams, BackParams, MatchRouteParams, Route, Router, BeforeEach, AfterEach, RouteMeta } from './types'
-export * from './types'
-
 export let router: Router
 
 /**
@@ -69,7 +67,7 @@ export const createRouter = (options: CreateOptions) => {
     }
     let targetRoute = routes.find((r: Route) => {
       // 如果是首页 直接返回第一个路由配置
-      if (path === '/') {
+      if (path === '/' || path === '') {
         return true
       }
       if (name) {
@@ -180,15 +178,26 @@ export const createRouter = (options: CreateOptions) => {
    * @param type
    * @returns {void}
    */
-  const routeTo = (type: string) => {
+  const routeTo = (params: any) => {
     return new Promise((resolve, reject) => {
-      const jump = (uni as any)[type]
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { type, query, ...rest } = params
+      let { url } = params
+      // const jump = (uni as any)[type] // 这种使用会被vite treeShaking 掉uni里面的方法
+      // 为了方法不被 vite treeShaking掉，使用显式赋值
+      let jump: any = uni.navigateTo
+      if (type === 'navigateTo') jump = uni.navigateTo
+      if (type === 'switchTab') jump = uni.switchTab
+      if (type === 'reLaunch') jump = uni.reLaunch
+      if (type === 'redirectTo') jump = uni.redirectTo
+      if (type === 'navigateBack') jump = uni.navigateBack
       const queryStr = stringifyQuery(routeMeta.to!.query)
-      let url = `/${routeMeta.to!.path}`
+      url = `/${routeMeta.to!.path}`
       if (queryStr) {
         url += `?${queryStr}`
       }
       jump({
+        ...rest,
         url: url,
         success: resolve,
         fail: reject
@@ -204,14 +213,13 @@ export const createRouter = (options: CreateOptions) => {
   const push = (params: RouteTypeParams | string) => {
     return new Promise((resolve: any, reject: any) => {
       params = getRoueParams(params)
-      const { type } = params
       try {
         // 检测路由有效性
         checkRouteValid(params)
         // 符合要求下一步
         next().then(() => {
           routing = false
-          routeTo(type).then(() => {
+          routeTo(params).then(() => {
             resolve()
             callWithoutNext(afterEach, routeMeta.to, routeMeta.from)
           })
