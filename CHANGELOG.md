@@ -1,3 +1,16 @@
+## [1.1.2](https://github.com/Gertyxs/uni-native-router/compare/v1.1.1...v1.1.2) (2022-08-02)
+
+
+
+## [1.1.1](https://github.com/Gertyxs/uni-native-router/compare/v1.1.0...v1.1.1) (2022-08-02)
+
+
+### Features
+
+* 新增说明文档 ([bf7a9ea](https://github.com/Gertyxs/uni-native-router/commit/bf7a9ea55ac9be594fc35a39f5d1efb358375200))
+
+
+
 # [1.1.0](https://github.com/Gertyxs/uni-native-router/compare/v1.0.9...v1.1.0) (2022-08-02)
 
 

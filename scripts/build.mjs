@@ -42,7 +42,7 @@ const main = async () => {
     shell.rm('-r', resolve('./packages/read-pages/dist/'))
   }
   if (packages.includes('uni-native-router')) {
-    shell.cp('-r', resolve('./README.md'), resolve('./packages/uni-native-router/dist/README.md'))
+    shell.cp('-r', resolve('./README.md'), resolve('./packages/uni-native-router/README.md'))
   }
 
   step('\nBuild Successfully')
