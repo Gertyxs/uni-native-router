@@ -1,6 +1,6 @@
 # uni-native-router
 
-![](https://img.shields.io/badge/npm-v1.1.2-blue)
+[![](https://img.shields.io/badge/npm-v1.1.4-blue)](https://www.npmjs.com/package/uni-native-router)
 
 > 一个使用 typescript 封装 uniapp 原生路由 API 库，使用 uni-app 原生钩子实现和方法实现、hooks 的使用方式适配 vue3
 
@@ -29,23 +29,23 @@ yarn add uni-native-router
 import { createRouter } from 'uni-native-router'
 export { useRoute, useRouter } from 'uni-native-router' // 导出适配vue3的hooks获取路由钩子方法
 import pages from '@/pages.json' // 导入路由配置文件
+import { App } from 'vue'
 
 // 创建路由对象
 export let router = createRouter({ routes: pages.pages })
 
 // 设置路由器
-export function setupRouter(app: any) {
-  // 路由请求前拦截
-  router.beforeEach(async (to: any, from: any, next: any) => {
-    next()
-  })
-  // 路由请求后拦截
-  router.afterEach((to: any, from: any) => {
-    // 逻辑代码
-  })
-
-  return router
+export const setupRouter = (app: App) => {
+  app.use(router)
 }
+// 路由请求前拦截
+router.beforeEach(async (to: any, from: any, next: any) => {
+  next()
+})
+// 路由请求后拦截
+router.afterEach((to: any, from: any) => {
+  // 逻辑代码
+})
 ```
 
 #### 注意

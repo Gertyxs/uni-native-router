@@ -1,3 +1,18 @@
+## [1.1.4](https://github.com/Gertyxs/uni-native-router/compare/v1.1.3...v1.1.4) (2023-12-06)
+
+
+
+## [1.1.3](https://github.com/Gertyxs/uni-native-router/compare/v1.1.2...v1.1.3) (2023-12-06)
+
+
+### Bug Fixes
+
+* 修复版本号问题 ([0570ea8](https://github.com/Gertyxs/uni-native-router/commit/0570ea8c08b2097fb7faf0e754bff34518a606bc))
+* 修复版本号问题 ([4b2a41f](https://github.com/Gertyxs/uni-native-router/commit/4b2a41f240a78b1cb928e261db1ac03a735e9f76))
+* 解决uni方法被treeShaking掉 ([3c35d21](https://github.com/Gertyxs/uni-native-router/commit/3c35d21fca1df6bc5f11a77aa6d93a6b47a0f27a))
+
+
+
 ## [1.1.2](https://github.com/Gertyxs/uni-native-router/compare/v1.1.1...v1.1.2) (2022-08-02)
 
 
